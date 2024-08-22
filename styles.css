@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.canvas-container {
+    position: relative;
+    width: 65%; /* Increase width for the canvas */
+}
+
+.form-container {
+    width: 30%;
+    margin-left: auto; /* Push the form container to the right */
+}
+
+#reservationCanvas {
+    width: 100%;
+    height: auto;
+}
+
+.input-field {
+    margin-bottom: 10px;
+}
+
+input[type="text"], input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #45a049;
+}
