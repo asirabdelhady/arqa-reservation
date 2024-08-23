@@ -388,11 +388,6 @@ function printCanvas() {
     const printFontSizeMM = 11 * pixelToMMFactor; // Scale the font size used on canvas
     const tickFontSizeMM = 16 * pixelToMMFactor; // Adjust the tick mark size
 
-    const scaledOptionsPositions = optionsPositions.map(position => ({
-        x: position.x * canvasToMMFactorX,
-        y: position.y * canvasToMMFactorY - 3
-    }));
-
     const printWindow = window.open('', '', 'width=800,height=600');
     printWindow.document.open();
     printWindow.document.write(`
@@ -482,6 +477,7 @@ function printCanvas() {
                 ${isBrokerChecked ? `<div id="brokerTick" class="tick">✔</div>` : ''}
                 ${isOtherChecked ? `<div id="otherTick" class="tick">✔</div>` : ''}
 
+
             </div>
             <script>
                 window.onload = function() {
@@ -496,6 +492,5 @@ function printCanvas() {
     `);
     printWindow.document.close();
 }
-
 
 
