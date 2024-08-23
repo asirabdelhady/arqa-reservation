@@ -16,16 +16,37 @@
         <h2>Enter Reservation Details</h2>
         <form id="reservationForm">
             <div class="input-field">
+                <label>Choose Categories:</label><br>
+                <input type="radio" id="najari" name="category" value="نجاري" onchange="updateCanvas()"> تجاري
+                <input type="radio" id="idari" name="category" value="اداري" onchange="updateCanvas()"> اداري
+                <input type="radio" id="tibi" name="category" value="طبي" onchange="updateCanvas()"> طبي
+            </div>                        
+            <div class="input-field">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" oninput="updateCanvas()">
+                <input type="text" id="name" name="name" maxlength="39" oninput="updateCanvas()">
             </div>
             <div class="input-field">
                 <label for="phone">Phone Number:</label>
-                <input type="text" id="phone" name="phone" oninput="updateCanvas()">
+                <input type="text" id="phone" name="phone" maxlength="13" oninput="updateCanvas()">
             </div>
             <div class="input-field">
                 <label for="date">Reservation Date:</label>
                 <input type="date" id="date" name="date" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
+                <label>How did you find us?</label>
+                <div>
+                    <input type="checkbox" id="option1" name="option1" onclick="updateCanvas()">
+                    <label for="option1">Website</label>
+                    <input type="checkbox" id="option2" name="option2" onclick="updateCanvas()">
+                    <label for="option2">Facebook</label>
+                    <input type="checkbox" id="option3" name="option3" onclick="updateCanvas()">
+                    <label for="option3">Head Office</label>
+                    <input type="checkbox" id="option4" name="option4" onclick="updateCanvas()">
+                    <label for="option4">Broker</label>
+                    <input type="checkbox" id="option5" name="option5" onclick="updateCanvas()">
+                    <label for="option5">Other</label>
+                </div>
             </div>
             <button type="button" onclick="printCanvas()">Print Reservation Paper</button>
         </form>
