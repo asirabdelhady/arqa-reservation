@@ -164,16 +164,16 @@ function printCanvas() {
     };
 
     const scaledNajariPosition = { 
-        x: najariPosition.x * canvasToMMFactorX, 
-        y: najariPosition.y * canvasToMMFactorY
+        x: najariPosition.x * canvasToMMFactorX - 3, 
+        y: najariPosition.y * canvasToMMFactorY - 4
     };
     const scaledIdariPosition = { 
-        x: idariPosition.x * canvasToMMFactorX, 
-        y: idariPosition.y * canvasToMMFactorY
+        x: idariPosition.x * canvasToMMFactorX - 3, 
+        y: idariPosition.y * canvasToMMFactorY - 4
     };
     const scaledTibiPosition = { 
-        x: tibiPosition.x * canvasToMMFactorX, 
-        y: tibiPosition.y * canvasToMMFactorY
+        x: tibiPosition.x * canvasToMMFactorX - 3, 
+        y: tibiPosition.y * canvasToMMFactorY - 4
     };
 
     // Scaling factor for font size (from pixel to mm conversion)
@@ -184,7 +184,7 @@ function printCanvas() {
 
     const scaledOptionsPositions = optionsPositions.map(position => ({
         x: position.x * canvasToMMFactorX,
-        y: position.y * canvasToMMFactorY -3 
+        y: position.y * canvasToMMFactorY - 3
     }));
 
     const printWindow = window.open('', '', 'width=800,height=600');
