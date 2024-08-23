@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 const img = new Image();
 
 // Define the positions for the checkboxes (adjust these for correct positioning)
-const najariPosition = { x: 942, y: 505 };  // Example position for نجاري
+const tujariPosition = { x: 942, y: 505 };  // Example position for نجاري
 const idariPosition = { x: 2443, y: 505 };   // Example position for اداري
 const tibiPosition = { x: 1693, y: 505 };    // Example position for طبي
 
@@ -81,7 +81,7 @@ function drawCanvas() {
     ctx.fillText(date, scaledDatePosition.x, scaledDatePosition.y);
 
     // Check the state of the checkboxes
-    const isNajariChecked = document.getElementById('najari').checked;
+    const isTujariChecked = document.getElementById('tujari').checked;
     const isIdariChecked = document.getElementById('idari').checked;
     const isTibiChecked = document.getElementById('tibi').checked;
 
@@ -89,12 +89,12 @@ function drawCanvas() {
     ctx.font = '40px Arial';  // Larger font for the tick mark
     ctx.fillStyle = 'green';   // Tick mark color
 
-    if (isNajariChecked) {
-        const scaledNajariPosition = {
-            x: calculatePosition(najariPosition.x, canvas.width, img.width),
-            y: calculatePosition(najariPosition.y, canvas.height, img.height)
+    if (isTujariChecked) {
+        const scaledTujariPosition = {
+            x: calculatePosition(tujariPosition.x, canvas.width, img.width),
+            y: calculatePosition(tujariPosition.y, canvas.height, img.height)
         };
-        ctx.fillText('✔', scaledNajariPosition.x, scaledNajariPosition.y);
+        ctx.fillText('✔', scaledTujariPosition.x, scaledTujariPosition.y);
     }
 
     if (isIdariChecked) {
@@ -139,7 +139,7 @@ function printCanvas() {
     const phone = document.getElementById('phone').value;
     const date = document.getElementById('date').value;
 
-    const isNajariChecked = document.getElementById('najari').checked;
+    const isTujariChecked = document.getElementById('tujari').checked;
     const isIdariChecked = document.getElementById('idari').checked;
     const isTibiChecked = document.getElementById('tibi').checked;
 
@@ -163,9 +163,9 @@ function printCanvas() {
         y: datePosition.y * canvasToMMFactorY 
     };
 
-    const scaledNajariPosition = { 
-        x: najariPosition.x * canvasToMMFactorX - 3, 
-        y: najariPosition.y * canvasToMMFactorY - 4
+    const scaledTujariPosition = { 
+        x: tujariPosition.x * canvasToMMFactorX - 3, 
+        y: tujariPosition.y * canvasToMMFactorY - 4
     };
     const scaledIdariPosition = { 
         x: idariPosition.x * canvasToMMFactorX - 3, 
@@ -229,7 +229,7 @@ function printCanvas() {
                 #nameText { top: ${scaledNamePosition.y}mm; right: ${canvasWidthMM - scaledNamePosition.x}mm; }
                 #phoneText { top: ${scaledPhonePosition.y}mm; right: ${canvasWidthMM - scaledPhonePosition.x}mm; }
                 #dateText { top: ${scaledDatePosition.y}mm; right: ${canvasWidthMM - scaledDatePosition.x}mm; }
-                #najariTick { top: ${scaledNajariPosition.y}mm; left: ${scaledNajariPosition.x}mm; }
+                #tujariTick { top: ${scaledTujariPosition.y}mm; left: ${scaledTujariPosition.x}mm; }
                 #idariTick { top: ${scaledIdariPosition.y}mm; left: ${scaledIdariPosition.x}mm; }
                 #tibiTick { top: ${scaledTibiPosition.y}mm; left: ${scaledTibiPosition.x}mm; }
 
@@ -247,7 +247,7 @@ function printCanvas() {
                 <div id="phoneText" class="text">${phone}</div>
                 <div id="dateText" class="text">${date}</div>
 
-                ${isNajariChecked ? `<div id="najariTick" class="tick">✔</div>` : ''}
+                ${isTujariChecked ? `<div id="tujariTick" class="tick">✔</div>` : ''}
                 ${isIdariChecked ? `<div id="idariTick" class="tick">✔</div>` : ''}
                 ${isTibiChecked ? `<div id="tibiTick" class="tick">✔</div>` : ''}
 
