@@ -49,11 +49,11 @@
                 <input type="radio" id="broker" name="howDidYouFindUS" value="broker" onchange="updateCanvas()"> Broker
                 <input type="radio" id="other" name="howDidYouFindUS" value="other" onchange="updateCanvas()"> Other
             </div>
-            <div class="input-field">
+            <div class="input-field"  id="otherHowField" style="display: none;">
                 <label for="otherHow">How did you find out about us</label>
                 <input type="text" id="otherHow" name="otherHow" maxlength="64" oninput="updateCanvas()">
             </div>
-            <div class="input-field">
+            <div class="input-field" id="brokerNameField" style="display: none;">
                 <label for="brokerName">Broker Name</label>
                 <input type="text" id="brokerName" name="brokerName" maxlength="49" oninput="updateCanvas()">
             </div>
