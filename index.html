@@ -34,6 +34,14 @@
                 <input type="date" id="date" name="date" oninput="updateCanvas()">
             </div>
             <div class="input-field">
+                <label for="occupation">Occupation</label>
+                <input type="text" id="occupation" name="occupation" maxlength="39" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" maxlength="39" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
                 <label>How did you find us?</label>
                 <div>
                     <input type="checkbox" id="option1" name="option1" onclick="updateCanvas()">
@@ -47,6 +55,35 @@
                     <input type="checkbox" id="option5" name="option5" onclick="updateCanvas()">
                     <label for="option5">Other</label>
                 </div>
+            </div>
+            <div class="input-field">
+                <label for="otherHow">How did you find out about us</label>
+                <input type="text" id="otherHow" name="otherHow" maxlength="64" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
+                <label for="brokerName">Broker Name</label>
+                <input type="text" id="brokerName" name="brokerName" maxlength="49" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
+                <label for="companyName">Company Name</label>
+                <input type="text" id="companyName" name="companyName" maxlength="49" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
+                <label for="companyCode">Company Code</label>
+                <input type="text" id="companyCode" name="companyCode" maxlength="29" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
+                <label for="crmCode">CRM Code</label>
+                <input type="text" id="crmCode" name="crmCode" maxlength="49" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
+                <label for="financeCode">Finance Code</label>
+                <input type="text" id="financeCode" name="financeCode" maxlength="28" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
+                <label>Type of Contract?</label><br>
+                <input type="radio" id="insideEgypt" name="contract" value="insideEgypt" onchange="updateCanvas()"> Inside Egypt
+                <input type="radio" id="outsideEgypt" name="contract" value="outsideEgypt" onchange="updateCanvas()"> Outside Egypt
             </div>
             <button type="button" onclick="printCanvas()">Print Reservation Paper</button>
         </form>
