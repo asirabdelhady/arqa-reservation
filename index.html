@@ -42,19 +42,12 @@
                 <input type="text" id="email" name="email" maxlength="39" oninput="updateCanvas()">
             </div>
             <div class="input-field">
-                <label>How did you find us?</label>
-                <div>
-                    <input type="checkbox" id="option1" name="option1" onclick="updateCanvas()">
-                    <label for="option1">Website</label>
-                    <input type="checkbox" id="option2" name="option2" onclick="updateCanvas()">
-                    <label for="option2">Facebook</label>
-                    <input type="checkbox" id="option3" name="option3" onclick="updateCanvas()">
-                    <label for="option3">Head Office</label>
-                    <input type="checkbox" id="option4" name="option4" onclick="updateCanvas()">
-                    <label for="option4">Broker</label>
-                    <input type="checkbox" id="option5" name="option5" onclick="updateCanvas()">
-                    <label for="option5">Other</label>
-                </div>
+                <label>How did you find us?</label><br>
+                <input type="radio" id="website" name="howDidYouFindUS" value="facebook" onchange="updateCanvas()"> Website
+                <input type="radio" id="facebook" name="howDidYouFindUS" value="instagram" onchange="updateCanvas()"> Facebook
+                <input type="radio" id="headoffice" name="howDidYouFindUS" value="headOffice" onchange="updateCanvas()"> Head Office <br>
+                <input type="radio" id="broker" name="howDidYouFindUS" value="broker" onchange="updateCanvas()"> Broker
+                <input type="radio" id="other" name="howDidYouFindUS" value="other" onchange="updateCanvas()"> Other
             </div>
             <div class="input-field">
                 <label for="otherHow">How did you find out about us</label>

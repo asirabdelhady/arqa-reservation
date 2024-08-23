@@ -8,6 +8,12 @@ const idariPosition = { x: 2443, y: 505 };   // Example position for اداري
 const tibiPosition = { x: 1693, y: 505 };    // Example position for طبي
 const insideEgyptPosition = { x: 2015, y: 1205 };    // Example position for طبي
 const outsideEgyptPosition = { x: 842, y: 1205 };    // Example position for طبي
+const websitePosition = { x: 350, y: 763 };  // Example position for نجاري
+const facebookPosition = { x: 800, y: 763 };   // Example position for اداري
+const headofficePosition = { x: 1285, y: 763 };    // Example position for طبي
+const brokerPosition = { x: 1645, y: 763 };    // Example position for طبي
+const otherPosition = { x: 1972, y: 763 };
+
 
 // Define the positions in pixels (these will be scaled for print preview)
 const namePosition = { x: 2030, y: 540 };  // Adjust this for correct positioning
@@ -23,20 +29,16 @@ const crmCodePosition = { x: 2145, y: 1060};  // Adjust this for correct positio
 const financeCodePosition = { x: 685, y: 1060};  // Adjust this for correct positioning
 
 // Define the positions for the checkboxes (adjust these for correct positioning)
-const websitePosition = { x: 942, y: 505 };  // Example position for نجاري
-const facebookPosition = { x: 2443, y: 505 };   // Example position for اداري
-const headofficePosition = { x: 1693, y: 505 };    // Example position for طبي
-const brokerPosition = { x: 1693, y: 505 };    // Example position for طبي
-const otherPosition = { x: 1693, y: 505 };    // Example position for طبي
+    // Example position for طبي
 
 
-const optionsPositions = [
-    { x: 350, y: 763 }, // Option 1 position
-    { x: 800, y: 763 }, // Option 2 position
-    { x: 1285, y: 763 }, // Option 3 position
-    { x: 1645, y: 763 }, // Option 4 position
-    { x: 1972, y: 763 }  // Option 5 position
-];
+// const optionsPositions = [
+//     { x: 350, y: 763 }, // Option 1 position
+//     { x: 800, y: 763 }, // Option 2 position
+//     { x: 1285, y: 763 }, // Option 3 position
+//     { x: 1645, y: 763 }, // Option 4 position
+//     { x: 1972, y: 763 }  // Option 5 position
+// ];
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -155,6 +157,11 @@ function drawCanvas() {
     const isTibiChecked = document.getElementById('tibi').checked;
     const isInsideEgyptChecked = document.getElementById('insideEgypt').checked;
     const isOutsideEgyptChecked = document.getElementById('outsideEgypt').checked;
+    const isWebsiteChecked = document.getElementById('website').checked;
+    const isFacebookChecked = document.getElementById('facebook').checked;
+    const isHeadofficeChecked = document.getElementById('headoffice').checked;
+    const isBrokerChecked = document.getElementById('broker').checked;
+    const isOtherChecked = document.getElementById('other').checked;
 
     // Draw tick marks if checkboxes are selected
     ctx.font = '40px Arial';  // Larger font for the tick mark
@@ -197,19 +204,55 @@ function drawCanvas() {
         };
         ctx.fillText('✔', scaledOutsideEgyptPosition.x, scaledOutsideEgyptPosition.y);
     }
-
-
-    for (let i = 1; i <= 5; i++) {
-        if (document.getElementById(`option${i}`).checked) {
-            const position = optionsPositions[i - 1];
-            const scaledPosition = {
-                x: calculatePosition(position.x, canvas.width, img.width),
-                y: calculatePosition(position.y, canvas.height, img.height)
-            };
-            ctx.font = '40px Arial'; // Adjust the font size for tick mark
-            ctx.fillText('✔', scaledPosition.x, scaledPosition.y); // Render tick mark
-        }
+    if (isWebsiteChecked) {
+        const scaledWebsitePosition = {
+            x: calculatePosition(websitePosition.x, canvas.width, img.width),
+            y: calculatePosition(websitePosition.y, canvas.height, img.height)
+        };
+        ctx.fillText('✔', scaledWebsitePosition.x, scaledWebsitePosition.y);
     }
+    if (isFacebookChecked) {
+        const scaledFacebookPosition = {
+            x: calculatePosition(facebookPosition.x, canvas.width, img.width),
+            y: calculatePosition(facebookPosition.y, canvas.height, img.height)
+        };
+        ctx.fillText('✔', scaledFacebookPosition.x, scaledFacebookPosition.y);
+    }
+    if (isHeadofficeChecked) {
+        const scaledHeadofficePosition = {
+            x: calculatePosition(headofficePosition.x, canvas.width, img.width),
+            y: calculatePosition(headofficePosition.y, canvas.height, img.height)
+        };
+        ctx.fillText('✔', scaledHeadofficePosition.x, scaledHeadofficePosition.y);
+    }
+    if (isBrokerChecked) {
+        const scaledBrokerPosition = {
+            x: calculatePosition(brokerPosition.x, canvas.width, img.width),
+            y: calculatePosition(brokerPosition.y, canvas.height, img.height)
+        };
+        ctx.fillText('✔', scaledBrokerPosition.x, scaledBrokerPosition.y);
+    }
+    if (isOtherChecked) {
+        const scaledOtherPosition = {
+            x: calculatePosition(otherPosition.x, canvas.width, img.width),
+            y: calculatePosition(otherPosition.y, canvas.height, img.height)
+        };
+        ctx.fillText('✔', scaledOtherPosition.x, scaledOtherPosition.y);
+    }
+
+
+
+    // for (let i = 1; i <= 5; i++) {
+    //     if (document.getElementById(`option${i}`).checked) {
+    //         const position = optionsPositions[i - 1];
+    //         const scaledPosition = {
+    //             x: calculatePosition(position.x, canvas.width, img.width),
+    //             y: calculatePosition(position.y, canvas.height, img.height)
+    //         };
+    //         ctx.font = '40px Arial'; // Adjust the font size for tick mark
+    //         ctx.fillText('✔', scaledPosition.x, scaledPosition.y); // Render tick mark
+    //     }
+    // }
 }
 
 
@@ -237,6 +280,12 @@ function printCanvas() {
     const isTibiChecked = document.getElementById('tibi').checked;
     const isInsideEgyptChecked = document.getElementById('insideEgypt').checked;
     const isOutsideEgyptChecked = document.getElementById('outsideEgypt').checked;
+    const isWebsiteChecked = document.getElementById('website').checked;
+    const isFacebookChecked = document.getElementById('facebook').checked;
+    const isHeadofficeChecked = document.getElementById('headoffice').checked;
+    const isBrokerChecked = document.getElementById('broker').checked;
+    const isOtherChecked = document.getElementById('other').checked;
+
 
     const canvasWidthMM = 210; // A4 width in mm
     const canvasHeightMM = 297; // A4 height in mm
@@ -312,6 +361,26 @@ function printCanvas() {
         x: outsideEgyptPosition.x * canvasToMMFactorX - 3,
         y: outsideEgyptPosition.y * canvasToMMFactorY - 4
     }
+    const scaledWebsitePosition = {
+        x: websitePosition.x * canvasToMMFactorX - 3,
+        y: websitePosition.y * canvasToMMFactorY - 4
+    }
+    const scaledFacebookPosition = {
+        x: facebookPosition.x * canvasToMMFactorX - 3,
+        y: facebookPosition.y * canvasToMMFactorY - 4
+    }
+    const scaledHeadofficePosition = {
+        x: headofficePosition.x * canvasToMMFactorX - 3,
+        y: headofficePosition.y * canvasToMMFactorY - 4
+    }
+    const scaledBrokerPosition = {
+        x: brokerPosition.x * canvasToMMFactorX - 3,
+        y: brokerPosition.y * canvasToMMFactorY - 4
+    }
+    const scaledOtherPosition = {
+        x: otherPosition.x * canvasToMMFactorX - 3,
+        y: otherPosition.y * canvasToMMFactorY - 4
+    }
 
     // Scaling factor for font size (from pixel to mm conversion)
     const   pixelToMMFactor = 0.2646; // 1 pixel ≈ 0.2646 mm
@@ -380,12 +449,11 @@ function printCanvas() {
                 #tibiTick { top: ${scaledTibiPosition.y}mm; left: ${scaledTibiPosition.x}mm; }
                 #insideEgyptTick { top: ${scaledInsideEgyptPosition.y}mm; left: ${scaledInsideEgyptPosition.x}mm; }
                 #outsideEgyptTick { top: ${scaledOutsideEgyptPosition.y}mm; left: ${scaledOutsideEgyptPosition.x}mm; }
-
-                #option1Text { top: ${scaledOptionsPositions[0].y}mm; right: ${canvasWidthMM - scaledOptionsPositions[0].x}mm; }
-                #option2Text { top: ${scaledOptionsPositions[1].y}mm; right: ${canvasWidthMM - scaledOptionsPositions[1].x}mm; }
-                #option3Text { top: ${scaledOptionsPositions[2].y}mm; right: ${canvasWidthMM - scaledOptionsPositions[2].x}mm; }
-                #option4Text { top: ${scaledOptionsPositions[3].y}mm; right: ${canvasWidthMM - scaledOptionsPositions[3].x}mm; }
-                #option5Text { top: ${scaledOptionsPositions[4].y}mm; right: ${canvasWidthMM - scaledOptionsPositions[4].x}mm; }
+                #websiteTick { top: ${scaledWebsitePosition.y}mm; left: ${scaledWebsitePosition.x}mm; }
+                #facebookTick { top: ${scaledFacebookPosition.y}mm; left: ${scaledFacebookPosition.x}mm; }
+                #headofficeTick { top: ${scaledHeadofficePosition.y}mm; left: ${scaledHeadofficePosition.x}mm; }
+                #brokerTick { top: ${scaledBrokerPosition.y}mm; left: ${scaledBrokerPosition.x}mm; }
+                #otherTick { top: ${scaledOtherPosition.y}mm; left: ${scaledOtherPosition.x}mm; }
 
             </style>
         </head>
@@ -408,12 +476,12 @@ function printCanvas() {
                 ${isTibiChecked ? `<div id="tibiTick" class="tick">✔</div>` : ''}
                 ${isInsideEgyptChecked ? `<div id="insideEgyptTick" class="tick">✔</div>` : ''}
                 ${isOutsideEgyptChecked ? `<div id="outsideEgyptTick" class="tick">✔</div>` : ''}
+                ${isWebsiteChecked ? `<div id="websiteTick" class="tick">✔</div>` : ''}
+                ${isFacebookChecked ? `<div id="facebookTick" class="tick">✔</div>` : ''}
+                ${isHeadofficeChecked ? `<div id="headofficeTick" class="tick">✔</div>` : ''}
+                ${isBrokerChecked ? `<div id="brokerTick" class="tick">✔</div>` : ''}
+                ${isOtherChecked ? `<div id="otherTick" class="tick">✔</div>` : ''}
 
-                ${document.getElementById('option1').checked ? `<div id="option1Text" class="text">✔</div>` : ''}
-                ${document.getElementById('option2').checked ? `<div id="option2Text" class="text">✔</div>` : ''}
-                ${document.getElementById('option3').checked ? `<div id="option3Text" class="text">✔</div>` : ''}
-                ${document.getElementById('option4').checked ? `<div id="option4Text" class="text">✔</div>` : ''}
-                ${document.getElementById('option5').checked ? `<div id="option5Text" class="text">✔</div>` : ''}
             </div>
             <script>
                 window.onload = function() {
