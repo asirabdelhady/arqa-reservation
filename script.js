@@ -162,6 +162,9 @@ function drawCanvas() {
     const isHeadofficeChecked = document.getElementById('headoffice').checked;
     const isBrokerChecked = document.getElementById('broker').checked;
     const isOtherChecked = document.getElementById('other').checked;
+    const brokerNameField = document.getElementById('brokerNameField');
+    const otherHowField = document.getElementById('otherHowField');
+
 
     // Draw tick marks if checkboxes are selected
     ctx.font = '40px Arial';  // Larger font for the tick mark
@@ -226,18 +229,24 @@ function drawCanvas() {
         ctx.fillText('✔', scaledHeadofficePosition.x, scaledHeadofficePosition.y);
     }
     if (isBrokerChecked) {
+        brokerNameField.style.display = 'block';
         const scaledBrokerPosition = {
             x: calculatePosition(brokerPosition.x, canvas.width, img.width),
             y: calculatePosition(brokerPosition.y, canvas.height, img.height)
         };
         ctx.fillText('✔', scaledBrokerPosition.x, scaledBrokerPosition.y);
+    }else{
+        brokerNameField.style.display = 'none';
     }
     if (isOtherChecked) {
+        otherHowField.style.display = 'block';
         const scaledOtherPosition = {
             x: calculatePosition(otherPosition.x, canvas.width, img.width),
             y: calculatePosition(otherPosition.y, canvas.height, img.height)
         };
         ctx.fillText('✔', scaledOtherPosition.x, scaledOtherPosition.y);
+    }else{
+        otherHowField.style.display = 'none';
     }
 
 
