@@ -1,6 +1,8 @@
 const canvas = document.getElementById('reservationCanvas');
 const ctx = canvas.getContext('2d');
 const img = new Image();
+const centeredInputs = ['project']; // Example: input fields that should be centered
+
 //comment
 // Define the positions for the checkboxes (adjust these for correct positioning)
 const tujariPosition = { x: 942, y: 505 };  // Example position for نجاري
@@ -17,7 +19,21 @@ const shopDetailsPostition = {x: 2465, y: 1435 }
 const officeDetailsPosition = {x: 1775, y: 1435 }
 const clinicDetailsPosition = {x: 1040, y: 1435 }
 const otherDetailsPosition = {x: 1330, y: 890 }
-
+const projectPosition = {x: 2390, y: 1630 }
+const unitCodePosition = {x: 2020, y: 1630 }
+const unitSpacePosition = {x: 1650, y: 1630 }
+const unitFloorPosition = {x: 1330, y: 1630 }
+const unitTowerPosition = {x: 1020, y: 1630 }
+const reservationPricePosition = {x: 700, y: 1630 }
+const totalUnitPricePosition = {x: 1970, y: 1730 }
+const numberInWordsPosition = {x: 810, y: 1730 }
+const serviceDepositPosition = {x: 1960, y: 2390 }
+const serviceDatePosition = {x: 680, y: 2400 }
+const commentsPosition = {x: 1960, y: 2480 }
+const applicantPosition = {x: 2350, y: 3325 }
+const salesDependantPosition = {x: 1770, y: 3325 }
+const salesSupervisorPosition = {x: 1170, y: 3325 }
+const headOfSalesPosition = {x: 590, y: 3325 }
 
 // Define the positions in pixels (these will be scaled for print preview)
 const namePosition = { x: 2030, y: 540 };  // Adjust this for correct positioning
@@ -31,7 +47,9 @@ const companyNamePosition = { x: 2145, y: 980};  // Adjust this for correct posi
 const companyCodePosition = { x: 685, y: 980};  // Adjust this for correct positioning
 const crmCodePosition = { x: 2145, y: 1060};  // Adjust this for correct positioning
 const financeCodePosition = { x: 685, y: 1060};  // Adjust this for correct positioning
-const otherDetailsInputPosition = { x: 1330, y: 890 };  // Adjust this for correct positioning
+const otherDetailsInputPosition = { x: 400, y: 1370 };  // Adjust this for correct positioning
+const typeCashPosition = {x: 1910, y: 1870 }
+const typeChequePosition = {x: 960, y: 1870 }
 
 
 
@@ -47,6 +65,22 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('companyCode').addEventListener('input', updateCanvas);
     document.getElementById('crmCode').addEventListener('input', updateCanvas);
     document.getElementById('financeCode').addEventListener('input', updateCanvas);
+    document.getElementById('project').addEventListener('input', updateCanvas);
+    document.getElementById('unitCode').addEventListener('input', updateCanvas);
+    document.getElementById('unitSpace').addEventListener('input', updateCanvas);
+    document.getElementById('unitFloor').addEventListener('input', updateCanvas);
+    document.getElementById('unitTower').addEventListener('input', updateCanvas);
+    document.getElementById('reservationPrice').addEventListener('input', updateCanvas);
+    document.getElementById('totalUnitPrice').addEventListener('input', updateCanvas);
+    console.log(totalUnitPrice); // Should log the input element
+    document.getElementById('numberInWords').addEventListener('input', updateCanvas);
+    document.getElementById('serviceDeposit').addEventListener('input', updateCanvas);
+    document.getElementById('serviceDate').addEventListener('input', updateCanvas);
+    document.getElementById('comments').addEventListener('input', updateCanvas);
+    document.getElementById('applicant').addEventListener('input', updateCanvas);
+    document.getElementById('salesDependant').addEventListener('input', updateCanvas);
+    document.getElementById('salesSupervisor').addEventListener('input', updateCanvas);
+    document.getElementById('headOfSales').addEventListener('input', updateCanvas);
 
 });
 
@@ -63,10 +97,63 @@ function calculatePosition(relativePosition, canvasSize, referenceSize) {
     return (relativePosition / referenceSize) * canvasSize;
 }
 
+function convertNumberToArabicWords(num) {
+    const units = ['', 'واحد', 'اثنين', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة'];
+    const tens = ['', 'عشرة', 'عشرون', 'ثلاثون', 'أربعون', 'خمسون', 'ستون', 'سبعون', 'ثمانون', 'تسعون'];
+    const hundreds = ['', 'مائة', 'مئتان', 'ثلاثمائة', 'أربعمائة', 'خمسمائة', 'ستمائة', 'سبعمائة', 'ثمانمائة', 'تسعمائة'];
+
+    let arabicWords = '';
+
+    if (num === 0) {
+        return 'صفر';
+    }
+
+    // Hundreds
+    if (Math.floor(num / 100) > 0) {
+        arabicWords += hundreds[Math.floor(num / 100)] + ' ';
+        num %= 100;
+    }
+
+    // Tens
+    if (num >= 20) {
+        arabicWords += tens[Math.floor(num / 10)] + ' ';
+        num %= 10;
+    } else if (num >= 10) {
+        switch (num) {
+            case 10:
+                arabicWords += 'عشرة';
+                break;
+            case 11:
+                arabicWords += 'أحد عشر';
+                break;
+            case 12:
+                arabicWords += 'اثنا عشر';
+                break;
+            default:
+                arabicWords += units[num % 10] + ' عشر';
+        }
+        num = 0;
+    }
+
+    // Units
+    if (num > 0) {
+        arabicWords += units[num] + ' ';
+    }
+
+    return arabicWords.trim();
+}
+
+
 // Function to draw the image and the text
 function drawCanvas() {
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);  // Ensure the image scales to canvas size
+
+    ctx.font = '36px Arial'; // Text size on canvas
+    ctx.fillStyle = 'black';
+    ctx.textAlign = 'right'; // Right-align the text for Arabic
+    ctx.direction = 'rtl';
 
     const name = document.getElementById('name').value;
     const phone = document.getElementById('phone').value;
@@ -80,7 +167,44 @@ function drawCanvas() {
     const crmCode = document.getElementById('crmCode').value;
     const financeCode = document.getElementById('financeCode').value;
     const otherDetailsInput = document.getElementById('otherDetailsInput').value;
+    const project = document.getElementById('project').value;
+    const unitCode = document.getElementById('unitCode').value;
+    const unitSpace = document.getElementById('unitSpace').value;
+    const unitFloor = document.getElementById('unitFloor').value;
+    const unitTower = document.getElementById('unitTower').value;
+    const reservationPrice = document.getElementById('reservationPrice').value;
+    const totalUnitPrice = document.getElementById('totalUnitPrice').value;
+    const numberInWords = document.getElementById('numberInWords').value;
+    const serviceDeposit = document.getElementById('serviceDeposit').value;
+    const serviceDate = document.getElementById('serviceDate').value;
+    const comments = document.getElementById('comments').value;
+    const applicant = document.getElementById('applicant').value;
+    const salesDependant = document.getElementById('salesDependant').value;
+    const salesSupervisor = document.getElementById('salesSupervisor').value;
+    const headOfSales = document.getElementById('headOfSales').value;
 
+    totalUnitPrice.value = 100000// Remove non-numeric characters
+
+
+    const number = parseInt(totalUnitPrice.value, 10);
+    
+    if (totalUnitPrice && totalUnitPrice.value) {
+        // Remove non-numeric characters (if needed, though the input type is number)
+        totalUnitPrice.value = 100000 // Remove non-numeric characters
+
+        // Parse the number and convert to Arabic words
+        const number = parseInt(totalUnitPrice.value, 10);
+
+        let numberInWords = '';
+        if (!isNaN(number)) {
+            numberInWords = convertNumberToArabicWords(number);
+        }
+
+        console.log(numberInWords); // For debugging purposes
+        // You can update the canvas or other elements with numberInWords here
+    } else {
+        console.error('totalUnitPrice value is not accessible or is empty.');
+    }
 
     const offset = 35; // Start with a 5-pixel offset, adjust as needed
 
@@ -132,13 +256,67 @@ function drawCanvas() {
         x: calculatePosition(otherDetailsInputPosition.x, canvas.width, img.width),
         y: calculatePosition(otherDetailsInputPosition.y, canvas.height, img.height) + offset
     }
-  
-
-
-    ctx.font = '36px Arial'; // Text size on canvas
-    ctx.fillStyle = 'black';
-    ctx.textAlign = 'right'; // Right-align the text for Arabic
-    ctx.direction = 'rtl';
+    const scaledProjectPosition = {
+        x: calculatePosition(projectPosition.x, canvas.width, img.width),
+        y: calculatePosition(projectPosition.y, canvas.height, img.height) + offset
+    }
+    const scaledUnitCodePosition = {
+        x: calculatePosition(unitCodePosition.x, canvas.width, img.width),
+        y: calculatePosition(unitCodePosition.y, canvas.height, img.height) + offset
+    }
+    const scaledUnitSpacePosition = {
+        x: calculatePosition(unitSpacePosition.x, canvas.width, img.width),
+        y: calculatePosition(unitSpacePosition.y, canvas.height, img.height) + offset
+    }
+    const scaledUnitFloorPosition = {
+        x: calculatePosition(unitFloorPosition.x, canvas.width, img.width),
+        y: calculatePosition(unitFloorPosition.y, canvas.height, img.height) + offset
+    }
+    const scaledUnitTowerPosition = {
+        x: calculatePosition(unitTowerPosition.x, canvas.width, img.width),
+        y: calculatePosition(unitTowerPosition.y, canvas.height, img.height) + offset
+    }
+    const scaledReservationPricePosition = {
+        x: calculatePosition(reservationPricePosition.x, canvas.width, img.width),
+        y: calculatePosition(reservationPricePosition.y, canvas.height, img.height) + offset
+    }
+    const scaledTotalUnitPricePosition = {
+        x: calculatePosition(totalUnitPricePosition.x, canvas.width, img.width),
+        y: calculatePosition(totalUnitPricePosition.y, canvas.height, img.height) + offset
+    }
+    const scaledNumberInWordsPosition = {
+        x: calculatePosition(numberInWordsPosition.x, canvas.width, img.width),
+        y: calculatePosition(numberInWordsPosition.y, canvas.height, img.height) + offset
+    }
+    const scaledServiceDepositPosition = {
+        x: calculatePosition(serviceDepositPosition.x, canvas.width, img.width),
+        y: calculatePosition(serviceDepositPosition.y, canvas.height, img.height) + offset
+    }
+    const scaledServiceDatePosition = {
+        x: calculatePosition(serviceDatePosition.x, canvas.width, img.width),
+        y: calculatePosition(serviceDatePosition.y, canvas.height, img.height) + offset
+    }
+    const scaledCommentsPosition = {
+        x: calculatePosition(commentsPosition.x, canvas.width, img.width),
+        y: calculatePosition(commentsPosition.y, canvas.height, img.height) + offset
+    }
+    const scaledApplicantPosition = {
+        x: calculatePosition(applicantPosition.x, canvas.width, img.width),
+        y: calculatePosition(applicantPosition.y, canvas.height, img.height) + offset
+    }
+    const scaledSalesDependantPosition = {
+        x: calculatePosition(salesDependantPosition.x, canvas.width, img.width),
+        y: calculatePosition(salesDependantPosition.y, canvas.height, img.height) + offset
+    }
+    const scaledSalesSupervisorPosition = {
+        x: calculatePosition(salesSupervisorPosition.x, canvas.width, img.width),
+        y: calculatePosition(salesSupervisorPosition.y, canvas.height, img.height) + offset
+    }
+    const scaledHeadOfSalesPosition = {
+        x: calculatePosition(headOfSalesPosition.x, canvas.width, img.width),
+        y: calculatePosition(headOfSalesPosition.y, canvas.height, img.height) + offset
+    }
+    
 
     ctx.fillText(name, scaledNamePosition.x, scaledNamePosition.y);
     ctx.fillText(phone, scaledPhonePosition.x, scaledPhonePosition.y);
@@ -152,6 +330,21 @@ function drawCanvas() {
     ctx.fillText(crmCode, scaledCrmCodePosition.x, scaledCrmCodePosition.y);
     ctx.fillText(financeCode, scaledFinanceCodePosition.x, scaledFinanceCodePosition.y);
     ctx.fillText(otherDetailsInput, scaledOtherDetailsInputPosition.x, scaledOtherDetailsInputPosition.y);
+    ctx.fillText(project, scaledProjectPosition.x, scaledProjectPosition.y);
+    ctx.fillText(unitCode, scaledUnitCodePosition.x, scaledUnitCodePosition.y);
+    ctx.fillText(unitSpace, scaledUnitSpacePosition.x, scaledUnitSpacePosition.y);
+    ctx.fillText(unitFloor, scaledUnitFloorPosition.x, scaledUnitFloorPosition.y);
+    ctx.fillText(unitTower, scaledUnitTowerPosition.x, scaledUnitTowerPosition.y);
+    ctx.fillText(reservationPrice, scaledReservationPricePosition.x, scaledReservationPricePosition.y);
+    ctx.fillText(totalUnitPrice, scaledTotalUnitPricePosition.x, scaledTotalUnitPricePosition.y);
+    ctx.fillText(numberInWords, scaledNumberInWordsPosition.x, scaledNumberInWordsPosition.y);
+    ctx.fillText(serviceDeposit, scaledServiceDepositPosition.x, scaledServiceDepositPosition.y);
+    ctx.fillText(serviceDate, scaledServiceDatePosition.x, scaledServiceDatePosition.y);
+    ctx.fillText(comments, scaledCommentsPosition.x, scaledCommentsPosition.y);
+    ctx.fillText(applicant, scaledApplicantPosition.x, scaledApplicantPosition.y);
+    ctx.fillText(salesDependant, scaledSalesDependantPosition.x, scaledSalesDependantPosition.y);
+    ctx.fillText(salesSupervisor, scaledSalesSupervisorPosition.x, scaledSalesSupervisorPosition.y);
+    ctx.fillText(headOfSales, scaledHeadOfSalesPosition.x, scaledHeadOfSalesPosition.y);
 
     // Check the state of the checkboxes
     const isTujariChecked = document.getElementById('tujari').checked;
@@ -171,7 +364,8 @@ function drawCanvas() {
     const isOfficeDetailsChecked = document.getElementById('officeDetails').checked;
     const isClinicDetailsChecked = document.getElementById('clinicDetails').checked;
     const isOtherDetailsChecked = document.getElementById('otherDetails').checked;
-
+    const isTypeCashChecked = document.getElementById('typeCash').checked;
+    const isTypeChequeChecked = document.getElementById('typeCheque').checked;
 
 
 
@@ -285,9 +479,23 @@ function drawCanvas() {
             x: calculatePosition(otherDetailsPosition.x, canvas.width, img.width),
             y: calculatePosition(otherDetailsPosition.y, canvas.height, img.height)
         };
-        ctx.fillText('✔', scaledOtherDetails.x, scaledOtherDetails.y);
+        ctx.fillText('', scaledOtherDetails.x, scaledOtherDetails.y);
     }else{
         otherDetailsField.style.display = 'none';
+    }
+    if (isTypeCashChecked) {
+        const scaledTypeCash = {
+            x: calculatePosition(typeCashPosition.x, canvas.width, img.width),
+            y: calculatePosition(typeCashPosition.y, canvas.height, img.height)
+        };
+        ctx.fillText('✔', scaledTypeCash.x, scaledTypeCash.y);
+    }
+    if (isTypeChequeChecked) {
+        const scaledTypeCheque = {
+            x: calculatePosition(typeChequePosition.x, canvas.width, img.width),
+            y: calculatePosition(typeChequePosition.y, canvas.height, img.height)
+        };
+        ctx.fillText('✔', scaledTypeCheque.x, scaledTypeCheque.y);
     }
 }
 
@@ -311,7 +519,25 @@ function printCanvas() {
     const crmCode = document.getElementById('crmCode').value;
     const financeCode = document.getElementById('financeCode').value;
     const otherDetailsInput = document.getElementById('otherDetailsInput').value;
+    const project = document.getElementById('project').value;
+    const unitCode = document.getElementById('unitCode').value;
+    const unitSpace = document.getElementById('unitSpace').value;
+    const unitFloor = document.getElementById('unitFloor').value;
+    const unitTower = document.getElementById('unitTower').value;
+    const reservationPrice = document.getElementById('reservationPrice').value;
+    const totalUnitPrice = document.getElementById('totalUnitPrice').value;
+    const numberInWords = document.getElementById('numberInWords').value;
+    const serviceDeposit = document.getElementById('serviceDeposit').value;
+    const serviceDate = document.getElementById('serviceDate').value;
+    const comments = document.getElementById('comments').value;
+    const applicant = document.getElementById('applicant').value;
+    const salesDependant = document.getElementById('salesDependant').value;
+    const salesSupervisor = document.getElementById('salesSupervisor').value;
+    const headOfSales = document.getElementById('headOfSales').value;
 
+
+
+    // Check the state of the checkboxes
     const isTujariChecked = document.getElementById('tujari').checked;
     const isIdariChecked = document.getElementById('idari').checked;
     const isTibiChecked = document.getElementById('tibi').checked;
@@ -326,6 +552,8 @@ function printCanvas() {
     const isOfficeDetailsChecked = document.getElementById('officeDetails').checked;
     const isClinicDetailsChecked = document.getElementById('clinicDetails').checked;
     const isOtherDetailsChecked = document.getElementById('otherDetails').checked;
+    const isTypeCashChecked = document.getElementById('typeCash').checked;
+    const isTypeChequeChecked = document.getElementById('typeCheque').checked;
 
 
     const canvasWidthMM = 210; // A4 width in mm
@@ -383,9 +611,69 @@ function printCanvas() {
         x: otherDetailsInputPosition.x * canvasToMMFactorX,
         y: otherDetailsInputPosition.y * canvasToMMFactorY
     }
+    const scaledProjectPosition = {
+        x: projectPosition.x * canvasToMMFactorX,
+        y: projectPosition.y * canvasToMMFactorY
+    }
+    const scaledUnitCodePosition = {
+        x: unitCodePosition.x * canvasToMMFactorX,
+        y: unitCodePosition.y * canvasToMMFactorY
+    }
+    const scaledUnitSpacePosition = {
+        x: unitSpacePosition.x * canvasToMMFactorX,
+        y: unitSpacePosition.y * canvasToMMFactorY
+    }
+    const scaledUnitFloorPosition = {
+        x: unitFloorPosition.x * canvasToMMFactorX,
+        y: unitFloorPosition.y * canvasToMMFactorY
+    }
+    const scaledUnitTowerPosition = {
+        x: unitTowerPosition.x * canvasToMMFactorX,
+        y: unitTowerPosition.y * canvasToMMFactorY
+    }
+    const scaledReservationPricePosition = {
+        x: reservationPricePosition.x * canvasToMMFactorX,
+        y: reservationPricePosition.y * canvasToMMFactorY
+    }
+    const scaledTotalUnitPricePosition = {
+        x: totalUnitPricePosition.x * canvasToMMFactorX,
+        y: totalUnitPricePosition.y * canvasToMMFactorY
+    }
+    const scaledNumberInWordsPosition = {
+        x: numberInWordsPosition.x * canvasToMMFactorX,
+        y: numberInWordsPosition.y * canvasToMMFactorY
+    }
+    const scaledServiceDepositPosition = {
+        x: serviceDepositPosition.x * canvasToMMFactorX,
+        y: serviceDepositPosition.y * canvasToMMFactorY
+    }
+    const scaledServiceDatePosition = {
+        x: serviceDatePosition.x * canvasToMMFactorX,
+        y: serviceDatePosition.y * canvasToMMFactorY
+    }
+    const scaledCommentsPosition = {
+        x: commentsPosition.x * canvasToMMFactorX,
+        y: commentsPosition.y * canvasToMMFactorY
+    }
+    const scaledApplicantPosition = {
+        x: applicantPosition.x * canvasToMMFactorX,
+        y: applicantPosition.y * canvasToMMFactorY
+    }
+    const scaledSalesDependantPosition = {
+        x: salesDependantPosition.x * canvasToMMFactorX,
+        y: salesDependantPosition.y * canvasToMMFactorY
+    }
+    const scaledSalesSupervisorPosition = {
+        x: salesSupervisorPosition.x * canvasToMMFactorX,
+        y: salesSupervisorPosition.y * canvasToMMFactorY
+    }
+    const scaledHeadOfSalesPosition = {
+        x: headOfSalesPosition.x * canvasToMMFactorX,
+        y: headOfSalesPosition.y * canvasToMMFactorY
+    }
 
 
-
+    // Calculate the scaled positions for the checkboxes
     const scaledTujariPosition = { 
         x: tujariPosition.x * canvasToMMFactorX - 5, 
         y: tujariPosition.y * canvasToMMFactorY - 7
@@ -441,6 +729,14 @@ function printCanvas() {
     const scaledOtherDetails = {
         x: otherDetailsPosition.x * canvasToMMFactorX - 5,
         y: otherDetailsPosition.y * canvasToMMFactorY - 7
+    }
+    const scaledTypeCash = {
+        x: typeCashPosition.x * canvasToMMFactorX - 5,
+        y: typeCashPosition.y * canvasToMMFactorY - 7
+    }
+    const scaledTypeCheque = {
+        x: typeChequePosition.x * canvasToMMFactorX - 5,
+        y: typeChequePosition.y * canvasToMMFactorY - 7
     }
 
     // Scaling factor for font size (from pixel to mm conversion)
@@ -499,6 +795,22 @@ function printCanvas() {
                 #crmCodeText { top: ${scaledCrmCodePosition.y}mm; right: ${canvasWidthMM - scaledCrmCodePosition.x}mm; }
                 #financeCodeText { top: ${scaledFinanceCodePosition.y}mm; right: ${canvasWidthMM - scaledFinanceCodePosition.x}mm; }
                 #otherDetailsInputText { top: ${scaledOtherDetailsInputPosition.y}mm; right: ${canvasWidthMM - scaledOtherDetailsInputPosition.x}mm; }
+                #projectText { top: ${scaledProjectPosition.y}mm; right: ${canvasWidthMM - scaledProjectPosition.x}mm; }
+                #unitCodeText { top: ${scaledUnitCodePosition.y}mm; right: ${canvasWidthMM - scaledUnitCodePosition.x}mm; }
+                #unitSpaceText { top: ${scaledUnitSpacePosition.y}mm; right: ${canvasWidthMM - scaledUnitSpacePosition.x}mm; }
+                #unitFloorText { top: ${scaledUnitFloorPosition.y}mm; right: ${canvasWidthMM - scaledUnitFloorPosition.x}mm; }
+                #unitTowerText { top: ${scaledUnitTowerPosition.y}mm; right: ${canvasWidthMM - scaledUnitTowerPosition.x}mm; }
+                #reservationPriceText { top: ${scaledReservationPricePosition.y}mm; right: ${canvasWidthMM - scaledReservationPricePosition.x}mm; }
+                #totalUnitPriceText { top: ${scaledTotalUnitPricePosition.y}mm; right: ${canvasWidthMM - scaledTotalUnitPricePosition.x}mm; }
+                #numberInWordsText { top: ${scaledNumberInWordsPosition.y}mm; right: ${canvasWidthMM - scaledNumberInWordsPosition.x}mm; }
+                #serviceDepositText { top: ${scaledServiceDepositPosition.y}mm; right: ${canvasWidthMM - scaledServiceDepositPosition.x}mm; }
+                #serviceDateText { top: ${scaledServiceDatePosition.y}mm; right: ${canvasWidthMM - scaledServiceDatePosition.x}mm; }
+                #commentsText { top: ${scaledCommentsPosition.y}mm; right: ${canvasWidthMM - scaledCommentsPosition.x}mm; }
+                #applicantText { top: ${scaledApplicantPosition.y}mm; right: ${canvasWidthMM - scaledApplicantPosition.x}mm; }
+                #salesDependantText { top: ${scaledSalesDependantPosition.y}mm; right: ${canvasWidthMM - scaledSalesDependantPosition.x}mm; }
+                #salesSupervisorText { top: ${scaledSalesSupervisorPosition.y}mm; right: ${canvasWidthMM - scaledSalesSupervisorPosition.x}mm; }
+                #headOfSalesText { top: ${scaledHeadOfSalesPosition.y}mm; right: ${canvasWidthMM - scaledHeadOfSalesPosition.x}mm; }
+
                 
 
 
@@ -516,6 +828,8 @@ function printCanvas() {
                 #officeDetailsTick { top: ${scaledOfficeDetails.y}mm; left: ${scaledOfficeDetails.x}mm; }
                 #clinicDetailsTick { top: ${scaledClinicDetails.y}mm; left: ${scaledClinicDetails.x}mm; }
                 #otherDetailsTick { top: ${scaledOtherDetails.y}mm; left: ${scaledOtherDetails.x}mm; }
+                #typeCashTick { top: ${scaledTypeCash.y}mm; left: ${scaledTypeCash.x}mm; }
+                #typeChequeTick { top: ${scaledTypeCheque.y}mm; left: ${scaledTypeCheque.x}mm; }
 
 
             </style>
@@ -534,6 +848,21 @@ function printCanvas() {
                 <div id="crmCodeText" class="text">${crmCode}</div>
                 <div id="financeCodeText" class="text">${financeCode}</div>
                 <div id="otherDetailsInputText" class="text">${otherDetailsInput}</div>
+                <div id="projectText" class="text">${project}</div>
+                <div id="unitCodeText" class="text">${unitCode}</div>
+                <div id="unitSpaceText" class="text">${unitSpace}</div>
+                <div id="unitFloorText" class="text">${unitFloor}</div>
+                <div id="unitTowerText" class="text">${unitTower}</div>
+                <div id="reservationPriceText" class="text">${reservationPrice}</div>
+                <div id="totalUnitPriceText" class="text">${totalUnitPrice}</div>
+                <div id="numberInWordsText" class="text">${numberInWords}</div>
+                <div id="serviceDepositText" class="text">${serviceDeposit}</div>
+                <div id="serviceDateText" class="text">${serviceDate}</div>
+                <div id="commentsText" class="text">${comments}</div>
+                <div id="applicantText" class="text">${applicant}</div>
+                <div id="salesDependantText" class="text">${salesDependant}</div>
+                <div id="salesSupervisorText" class="text">${salesSupervisor}</div>
+                <div id="headOfSalesText" class="text">${headOfSales}</div>
 
                 ${isTujariChecked ? `<div id="tujariTick" class="tick">✔</div>` : ''}
                 ${isIdariChecked ? `<div id="idariTick" class="tick">✔</div>` : ''}
@@ -548,7 +877,9 @@ function printCanvas() {
                 ${isShopDeatilsChecked ? `<div id="shopDetailsTick" class="tick">✔</div>` : ''}
                 ${isOfficeDetailsChecked ? `<div id="officeDetailsTick" class="tick">✔</div>` : ''}
                 ${isClinicDetailsChecked ? `<div id="clinicDetailsTick" class="tick">✔</div>` : ''}
-                ${isOtherDetailsChecked ? `<div id="otherDetailsTick" class="tick">✔</div>` : ''}
+                ${isOtherDetailsChecked ? `<div id="otherDetailsTick" class="tick"></div>` : ''}
+                ${isTypeCashChecked ? `<div id="typeCashTick" class="tick">✔</div>` : ''}
+                ${isTypeChequeChecked ? `<div id="typeChequeTick" class="tick">✔</div>` : ''}
 
 
             </div>
