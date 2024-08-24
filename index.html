@@ -82,6 +82,11 @@
                 <input type="radio" id="shopDetails" name="reservationDetails" value="shopDetails" onchange="updateCanvas()"> Shop
                 <input type="radio" id="officeDetails" name="reservationDetails" value="officeDetails" onchange="updateCanvas()"> Office
                 <input type="radio" id="clinicDetails" name="reservationDetails" value="clinicDetails" onchange="updateCanvas()"> Clinic
+                <input type="radio" id="otherDetails" name="reservationDetails" value="otherDetails" onchange="updateCanvas()"> Other
+            </div>
+            <div class="input-field" id="otherDetailsFields" style="display: none;">
+                <label for="otherDetailsInput">What type is the unit?</label>
+                <input type="text" id="otherDetailsInput" name="otherDetailsInput" maxlength="49" oninput="updateCanvas()">
             </div>
             <button type="button" onclick="printCanvas()">Print Reservation Paper</button>
         </form>

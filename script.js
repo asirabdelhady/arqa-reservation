@@ -13,7 +13,10 @@ const facebookPosition = { x: 800, y: 763 };   // Example position for ادار�
 const headofficePosition = { x: 1285, y: 763 };    // Example position for طبي
 const brokerPosition = { x: 1645, y: 763 };    // Example position for طبي
 const otherPosition = { x: 1972, y: 763 };
-const shopDetailsPostition = {x: 2465, y: 1430 }
+const shopDetailsPostition = {x: 2465, y: 1435 }
+const officeDetailsPosition = {x: 1775, y: 1435 }
+const clinicDetailsPosition = {x: 1040, y: 1435 }
+const otherDetailsPosition = {x: 1330, y: 890 }
 
 
 // Define the positions in pixels (these will be scaled for print preview)
@@ -28,18 +31,8 @@ const companyNamePosition = { x: 2145, y: 980};  // Adjust this for correct posi
 const companyCodePosition = { x: 685, y: 980};  // Adjust this for correct positioning
 const crmCodePosition = { x: 2145, y: 1060};  // Adjust this for correct positioning
 const financeCodePosition = { x: 685, y: 1060};  // Adjust this for correct positioning
+const otherDetailsInputPosition = { x: 1330, y: 890 };  // Adjust this for correct positioning
 
-// Define the positions for the checkboxes (adjust these for correct positioning)
-    // Example position for طبي
-
-
-// const optionsPositions = [
-//     { x: 350, y: 763 }, // Option 1 position
-//     { x: 800, y: 763 }, // Option 2 position
-//     { x: 1285, y: 763 }, // Option 3 position
-//     { x: 1645, y: 763 }, // Option 4 position
-//     { x: 1972, y: 763 }  // Option 5 position
-// ];
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -54,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('companyCode').addEventListener('input', updateCanvas);
     document.getElementById('crmCode').addEventListener('input', updateCanvas);
     document.getElementById('financeCode').addEventListener('input', updateCanvas);
-    document.getElementById('shopDetails').addEventListener('input', updateCanvas);
 
 });
 
@@ -87,6 +79,7 @@ function drawCanvas() {
     const companyCode = document.getElementById('companyCode').value;
     const crmCode = document.getElementById('crmCode').value;
     const financeCode = document.getElementById('financeCode').value;
+    const otherDetailsInput = document.getElementById('otherDetailsInput').value;
 
 
     const offset = 35; // Start with a 5-pixel offset, adjust as needed
@@ -135,6 +128,10 @@ function drawCanvas() {
         x: calculatePosition(financeCodePosition.x, canvas.width, img.width),
         y: calculatePosition(financeCodePosition.y, canvas.height, img.height) + offset
     }
+    const scaledOtherDetailsInputPosition = {
+        x: calculatePosition(otherDetailsInputPosition.x, canvas.width, img.width),
+        y: calculatePosition(otherDetailsInputPosition.y, canvas.height, img.height) + offset
+    }
   
 
 
@@ -154,6 +151,7 @@ function drawCanvas() {
     ctx.fillText(companyCode, scaledCompanyCodePosition.x, scaledCompanyCodePosition.y);
     ctx.fillText(crmCode, scaledCrmCodePosition.x, scaledCrmCodePosition.y);
     ctx.fillText(financeCode, scaledFinanceCodePosition.x, scaledFinanceCodePosition.y);
+    ctx.fillText(otherDetailsInput, scaledOtherDetailsInputPosition.x, scaledOtherDetailsInputPosition.y);
 
     // Check the state of the checkboxes
     const isTujariChecked = document.getElementById('tujari').checked;
@@ -168,7 +166,13 @@ function drawCanvas() {
     const isOtherChecked = document.getElementById('other').checked;
     const brokerNameField = document.getElementById('brokerNameField');
     const otherHowField = document.getElementById('otherHowField');
+    const otherDetailsField = document.getElementById('otherDetailsFields');
     const isShopDeatilsChecked = document.getElementById('shopDetails').checked;
+    const isOfficeDetailsChecked = document.getElementById('officeDetails').checked;
+    const isClinicDetailsChecked = document.getElementById('clinicDetails').checked;
+    const isOtherDetailsChecked = document.getElementById('otherDetails').checked;
+
+
 
 
     // Draw tick marks if checkboxes are selected
@@ -261,21 +265,30 @@ function drawCanvas() {
         };
         ctx.fillText('✔', scaledShopDetails.x, scaledShopDetails.y);
     }
-    
-
-
-
-    // for (let i = 1; i <= 5; i++) {
-    //     if (document.getElementById(`option${i}`).checked) {
-    //         const position = optionsPositions[i - 1];
-    //         const scaledPosition = {
-    //             x: calculatePosition(position.x, canvas.width, img.width),
-    //             y: calculatePosition(position.y, canvas.height, img.height)
-    //         };
-    //         ctx.font = '40px Arial'; // Adjust the font size for tick mark
-    //         ctx.fillText('✔', scaledPosition.x, scaledPosition.y); // Render tick mark
-    //     }
-    // }
+    if (isOfficeDetailsChecked) {
+        const scaledOfficeDetails = {
+            x: calculatePosition(officeDetailsPosition.x, canvas.width, img.width),
+            y: calculatePosition(officeDetailsPosition.y, canvas.height, img.height)
+        };
+        ctx.fillText('✔', scaledOfficeDetails.x, scaledOfficeDetails.y);
+    }
+    if (isClinicDetailsChecked) {
+        const scaledClinicDetails = {
+            x: calculatePosition(clinicDetailsPosition.x, canvas.width, img.width),
+            y: calculatePosition(clinicDetailsPosition.y, canvas.height, img.height)
+        };
+        ctx.fillText('✔', scaledClinicDetails.x, scaledClinicDetails.y);
+    }
+    if (isOtherDetailsChecked) {
+        otherDetailsField.style.display = 'block';
+        const scaledOtherDetails = {
+            x: calculatePosition(otherDetailsPosition.x, canvas.width, img.width),
+            y: calculatePosition(otherDetailsPosition.y, canvas.height, img.height)
+        };
+        ctx.fillText('✔', scaledOtherDetails.x, scaledOtherDetails.y);
+    }else{
+        otherDetailsField.style.display = 'none';
+    }
 }
 
 
@@ -297,6 +310,7 @@ function printCanvas() {
     const companyCode = document.getElementById('companyCode').value;
     const crmCode = document.getElementById('crmCode').value;
     const financeCode = document.getElementById('financeCode').value;
+    const otherDetailsInput = document.getElementById('otherDetailsInput').value;
 
     const isTujariChecked = document.getElementById('tujari').checked;
     const isIdariChecked = document.getElementById('idari').checked;
@@ -308,7 +322,10 @@ function printCanvas() {
     const isHeadofficeChecked = document.getElementById('headoffice').checked;
     const isBrokerChecked = document.getElementById('broker').checked;
     const isOtherChecked = document.getElementById('other').checked;
-    const isShopDeatilsChecked = document.getElementById('shopDetails').checked; 
+    const isShopDeatilsChecked = document.getElementById('shopDetails').checked;
+    const isOfficeDetailsChecked = document.getElementById('officeDetails').checked;
+    const isClinicDetailsChecked = document.getElementById('clinicDetails').checked;
+    const isOtherDetailsChecked = document.getElementById('otherDetails').checked;
 
 
     const canvasWidthMM = 210; // A4 width in mm
@@ -362,6 +379,10 @@ function printCanvas() {
         x: financeCodePosition.x * canvasToMMFactorX,
         y: financeCodePosition.y * canvasToMMFactorY
     }
+    const scaledOtherDetailsInputPosition = {
+        x: otherDetailsInputPosition.x * canvasToMMFactorX,
+        y: otherDetailsInputPosition.y * canvasToMMFactorY
+    }
 
 
 
@@ -408,6 +429,18 @@ function printCanvas() {
     const scaledShopDetails = {
         x: shopDetailsPostition.x * canvasToMMFactorX - 5,
         y: shopDetailsPostition.y * canvasToMMFactorY - 7
+    }
+    const scaledOfficeDetails = {
+        x: officeDetailsPosition.x * canvasToMMFactorX - 5,
+        y: officeDetailsPosition.y * canvasToMMFactorY - 7
+    }
+    const scaledClinicDetails = {
+        x: clinicDetailsPosition.x * canvasToMMFactorX - 5,
+        y: clinicDetailsPosition.y * canvasToMMFactorY - 7
+    }
+    const scaledOtherDetails = {
+        x: otherDetailsPosition.x * canvasToMMFactorX - 5,
+        y: otherDetailsPosition.y * canvasToMMFactorY - 7
     }
 
     // Scaling factor for font size (from pixel to mm conversion)
@@ -465,6 +498,8 @@ function printCanvas() {
                 #companyCodeText { top: ${scaledCompanyCodePosition.y}mm; right: ${canvasWidthMM - scaledCompanyCodePosition.x}mm; }
                 #crmCodeText { top: ${scaledCrmCodePosition.y}mm; right: ${canvasWidthMM - scaledCrmCodePosition.x}mm; }
                 #financeCodeText { top: ${scaledFinanceCodePosition.y}mm; right: ${canvasWidthMM - scaledFinanceCodePosition.x}mm; }
+                #otherDetailsInputText { top: ${scaledOtherDetailsInputPosition.y}mm; right: ${canvasWidthMM - scaledOtherDetailsInputPosition.x}mm; }
+                
 
 
                 #tujariTick { top: ${scaledTujariPosition.y}mm; left: ${scaledTujariPosition.x}mm; }
@@ -478,6 +513,9 @@ function printCanvas() {
                 #brokerTick { top: ${scaledBrokerPosition.y}mm; left: ${scaledBrokerPosition.x}mm; }
                 #otherTick { top: ${scaledOtherPosition.y}mm; left: ${scaledOtherPosition.x}mm; }
                 #shopDetailsTick { top: ${scaledShopDetails.y}mm; left: ${scaledShopDetails.x}mm; }
+                #officeDetailsTick { top: ${scaledOfficeDetails.y}mm; left: ${scaledOfficeDetails.x}mm; }
+                #clinicDetailsTick { top: ${scaledClinicDetails.y}mm; left: ${scaledClinicDetails.x}mm; }
+                #otherDetailsTick { top: ${scaledOtherDetails.y}mm; left: ${scaledOtherDetails.x}mm; }
 
 
             </style>
@@ -495,6 +533,7 @@ function printCanvas() {
                 <div id="companyCodeText" class="text">${companyCode}</div>
                 <div id="crmCodeText" class="text">${crmCode}</div>
                 <div id="financeCodeText" class="text">${financeCode}</div>
+                <div id="otherDetailsInputText" class="text">${otherDetailsInput}</div>
 
                 ${isTujariChecked ? `<div id="tujariTick" class="tick">✔</div>` : ''}
                 ${isIdariChecked ? `<div id="idariTick" class="tick">✔</div>` : ''}
@@ -507,6 +546,9 @@ function printCanvas() {
                 ${isBrokerChecked ? `<div id="brokerTick" class="tick">✔</div>` : ''}
                 ${isOtherChecked ? `<div id="otherTick" class="tick">✔</div>` : ''}
                 ${isShopDeatilsChecked ? `<div id="shopDetailsTick" class="tick">✔</div>` : ''}
+                ${isOfficeDetailsChecked ? `<div id="officeDetailsTick" class="tick">✔</div>` : ''}
+                ${isClinicDetailsChecked ? `<div id="clinicDetailsTick" class="tick">✔</div>` : ''}
+                ${isOtherDetailsChecked ? `<div id="otherDetailsTick" class="tick">✔</div>` : ''}
 
 
             </div>
@@ -520,5 +562,3 @@ function printCanvas() {
     `);
     printWindow.document.close();
 }
-
-
