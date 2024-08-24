@@ -24,7 +24,7 @@ body {
     margin-bottom: 10px;
 }
 
-input[type="text"], input[type="date"] {
+input[type="text"], input[type="date"], input[type="number"] {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
@@ -43,4 +43,25 @@ button {
 
 button:hover {
     background-color: #45a049;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th { /* Dark blue background for headers */
+    text-align: center;
+    font-size: 16px;
+    padding-left: 3 px;
+    padding-right: 3px;
+}
+
+td {
+    text-align: center;
+    padding: 10px;
+}
+
+.form-row {
+    display: flex;
+    gap: 5px; /* Adjust as needed for spacing between fields */
 }

@@ -82,7 +82,112 @@
                 <input type="radio" id="shopDetails" name="reservationDetails" value="shopDetails" onchange="updateCanvas()"> Shop
                 <input type="radio" id="officeDetails" name="reservationDetails" value="officeDetails" onchange="updateCanvas()"> Office
                 <input type="radio" id="clinicDetails" name="reservationDetails" value="clinicDetails" onchange="updateCanvas()"> Clinic
+                <input type="radio" id="otherDetails" name="reservationDetails" value="otherDetails" onchange="updateCanvas()"> Other
             </div>
+            <div class="input-field" id="otherDetailsFields" style="display: none;">
+                <label for="otherDetailsInput">What type is the unit?</label>
+                <input type="text" id="otherDetailsInput" name="otherDetailsInput" maxlength="20" oninput="updateCanvas()">
+            </div>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>قيمة الحجز</th>
+                        <th>البرج</th>
+                        <th>الطابق</th>
+                        <th>المساحة</th>
+                        <th>كود الوحدة</th>
+                        <th>المشروع</th>    
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" placeholder="" id="reservationPrice" maxlength="20"></td>
+                        <td><input type="text" placeholder="" id="unitTower" maxlength="10"></td>
+                        <td><input type="text" placeholder="" id="unitFloor" maxlength="10"></td>
+                        <td><input type="text" placeholder="" id="unitSpace" maxlength="10"></td>
+                        <td><input type="text" placeholder="" id="unitCode" maxlength="10"></td>
+                        <td><input type="text" placeholder="" id="project" maxlength="10"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="input-field">
+                <label for="totalUnitPrice">اجمالي ثمن الوحده</label><br>
+                <input type="number" id="totalUnitPrice" name="totalUnitPrice" maxlength="49" oninput="updateCanvas()">
+            </div>
+            <p id="numberInWords"></p> 
+            <br>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>قسط شهري <br>
+                    <input type="text" placeholder="">
+                </th>
+                        <th>دفعة استلام نهائي</th>
+                        <th>دفعة</th>
+                        <th>دفعة</th>
+                        <th>دفعة</th>
+                        <th>دفعة</th>
+                        <th>دفعة التعاقد</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <th>الدفعة</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <th>التاريخ</th>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="input-field">
+                <label>Payment Type</label><br>
+                <input type="radio" id="typeCash" name="paymentType" value="typeCash" onchange="updateCanvas()"> Cash
+                <input type="radio" id="typeCheque" name="paymentType" value="typeCheque" onchange="updateCanvas()"> With Cheque
+            </div>
+            <div class="input-field">
+                <label for="serviceDeposit">وديعة الصيانه</label><br>
+                <input type="text" id="serviceDeposit" name="serviceDeposit" maxlength="49" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
+                <label for="serviceDate">التاريخ</label><br>
+                <input type="date" id="serviceDate" name="serviceDate" maxlength="49" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
+                <label for="comments">ملاحاظات</label><br>
+                <input type="text" id="comments" name="comments" maxlength="49" oninput="updateCanvas()">
+            </div>
+           <div class="form-row">
+            <div class="input-field">
+                <label for="headOfSales">رئيس قطاع المبيعات</label><br>
+                <input type="text" id="headOfSales" name="headOfSales maxlength="49" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
+                <label for="salesSupervisor">مدير المبيعات</label><br>
+                <input type="text" id="salesSupervisor" name="salesSupervisor" maxlength="49" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
+                <label for="salesDependant">مسئول المبيعات</label><br>
+                <input type="text" id="salesDependant" name="salesDependant" maxlength="49" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
+                <label for="applicant">مقدم طلب الحجز</label><br>
+                <input type="text" id="applicant" name="applicant" maxlength="49" oninput="updateCanvas()">
+            </div>
+           </div>
             <button type="button" onclick="printCanvas()">Print Reservation Paper</button>
         </form>
     </div>
