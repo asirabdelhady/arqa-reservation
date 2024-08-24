@@ -1,7 +1,7 @@
 const canvas = document.getElementById('reservationCanvas');
 const ctx = canvas.getContext('2d');
 const img = new Image();
-
+//comment
 // Define the positions for the checkboxes (adjust these for correct positioning)
 const tujariPosition = { x: 942, y: 505 };  // Example position for نجاري
 const idariPosition = { x: 2443, y: 505 };   // Example position for اداري
