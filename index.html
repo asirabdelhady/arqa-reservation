@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <div class="canvas-container">
         <canvas id="reservationCanvas" width="800" height="1000"></canvas>
     </div>
@@ -77,6 +76,12 @@
                 <label>Type of Contract?</label><br>
                 <input type="radio" id="insideEgypt" name="contract" value="insideEgypt" onchange="updateCanvas()"> Inside Egypt
                 <input type="radio" id="outsideEgypt" name="contract" value="outsideEgypt" onchange="updateCanvas()"> Outside Egypt
+            </div>
+            <div class="input-field">
+                <label>Reservation Details</label><br>
+                <input type="radio" id="shopDetails" name="reservationDetails" value="shopDetails" onchange="updateCanvas()"> Shop
+                <input type="radio" id="officeDetails" name="reservationDetails" value="officeDetails" onchange="updateCanvas()"> Office
+                <input type="radio" id="clinicDetails" name="reservationDetails" value="clinicDetails" onchange="updateCanvas()"> Clinic
             </div>
             <button type="button" onclick="printCanvas()">Print Reservation Paper</button>
         </form>

@@ -1,7 +1,7 @@
 const canvas = document.getElementById('reservationCanvas');
 const ctx = canvas.getContext('2d');
 const img = new Image();
-
+//comment
 // Define the positions for the checkboxes (adjust these for correct positioning)
 const tujariPosition = { x: 942, y: 505 };  // Example position for نجاري
 const idariPosition = { x: 2443, y: 505 };   // Example position for اداري
@@ -13,6 +13,7 @@ const facebookPosition = { x: 800, y: 763 };   // Example position for ادار�
 const headofficePosition = { x: 1285, y: 763 };    // Example position for طبي
 const brokerPosition = { x: 1645, y: 763 };    // Example position for طبي
 const otherPosition = { x: 1972, y: 763 };
+const shopDetailsPostition = {x: 2465, y: 1430 }
 
 
 // Define the positions in pixels (these will be scaled for print preview)
@@ -53,6 +54,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('companyCode').addEventListener('input', updateCanvas);
     document.getElementById('crmCode').addEventListener('input', updateCanvas);
     document.getElementById('financeCode').addEventListener('input', updateCanvas);
+    document.getElementById('shopDetails').addEventListener('input', updateCanvas);
+
 });
 
 img.src = 'images/Reservation.jpg'; // Path to your image
@@ -132,6 +135,7 @@ function drawCanvas() {
         x: calculatePosition(financeCodePosition.x, canvas.width, img.width),
         y: calculatePosition(financeCodePosition.y, canvas.height, img.height) + offset
     }
+  
 
 
     ctx.font = '36px Arial'; // Text size on canvas
@@ -164,10 +168,11 @@ function drawCanvas() {
     const isOtherChecked = document.getElementById('other').checked;
     const brokerNameField = document.getElementById('brokerNameField');
     const otherHowField = document.getElementById('otherHowField');
+    const isShopDeatilsChecked = document.getElementById('shopDetails').checked;
 
 
     // Draw tick marks if checkboxes are selected
-    ctx.font = '40px Arial';  // Larger font for the tick mark
+    ctx.font = '80px Arial';  // Larger font for the tick mark
     ctx.fillStyle = 'green';   // Tick mark color
 
     if (isTujariChecked) {
@@ -249,6 +254,15 @@ function drawCanvas() {
         otherHowField.style.display = 'none';
     }
 
+    if (isShopDeatilsChecked) {
+        const scaledShopDetails = {
+            x: calculatePosition(shopDetailsPostition.x, canvas.width, img.width),
+            y: calculatePosition(shopDetailsPostition.y, canvas.height, img.height)
+        };
+        ctx.fillText('✔', scaledShopDetails.x, scaledShopDetails.y);
+    }
+    
+
 
 
     // for (let i = 1; i <= 5; i++) {
@@ -294,6 +308,7 @@ function printCanvas() {
     const isHeadofficeChecked = document.getElementById('headoffice').checked;
     const isBrokerChecked = document.getElementById('broker').checked;
     const isOtherChecked = document.getElementById('other').checked;
+    const isShopDeatilsChecked = document.getElementById('shopDetails').checked; 
 
 
     const canvasWidthMM = 210; // A4 width in mm
@@ -351,54 +366,57 @@ function printCanvas() {
 
 
     const scaledTujariPosition = { 
-        x: tujariPosition.x * canvasToMMFactorX - 3, 
-        y: tujariPosition.y * canvasToMMFactorY - 4
+        x: tujariPosition.x * canvasToMMFactorX - 5, 
+        y: tujariPosition.y * canvasToMMFactorY - 7
     };
     const scaledIdariPosition = { 
-        x: idariPosition.x * canvasToMMFactorX - 3, 
-        y: idariPosition.y * canvasToMMFactorY - 4
+        x: idariPosition.x * canvasToMMFactorX - 5, 
+        y: idariPosition.y * canvasToMMFactorY - 7
     };
     const scaledTibiPosition = { 
-        x: tibiPosition.x * canvasToMMFactorX - 3, 
-        y: tibiPosition.y * canvasToMMFactorY - 4
+        x: tibiPosition.x * canvasToMMFactorX - 5, 
+        y: tibiPosition.y * canvasToMMFactorY - 7
     };
     const scaledInsideEgyptPosition = {
-        x: insideEgyptPosition.x * canvasToMMFactorX - 3,
-        y: insideEgyptPosition.y * canvasToMMFactorY - 4
+        x: insideEgyptPosition.x * canvasToMMFactorX - 5,
+        y: insideEgyptPosition.y * canvasToMMFactorY - 7
     }
     const scaledOutsideEgyptPosition = {
-        x: outsideEgyptPosition.x * canvasToMMFactorX - 3,
-        y: outsideEgyptPosition.y * canvasToMMFactorY - 4
+        x: outsideEgyptPosition.x * canvasToMMFactorX - 5,
+        y: outsideEgyptPosition.y * canvasToMMFactorY - 7
     }
     const scaledWebsitePosition = {
-        x: websitePosition.x * canvasToMMFactorX - 3,
-        y: websitePosition.y * canvasToMMFactorY - 4
+        x: websitePosition.x * canvasToMMFactorX - 5,
+        y: websitePosition.y * canvasToMMFactorY - 7
     }
     const scaledFacebookPosition = {
-        x: facebookPosition.x * canvasToMMFactorX - 3,
-        y: facebookPosition.y * canvasToMMFactorY - 4
+        x: facebookPosition.x * canvasToMMFactorX - 5,
+        y: facebookPosition.y * canvasToMMFactorY - 7
     }
     const scaledHeadofficePosition = {
-        x: headofficePosition.x * canvasToMMFactorX - 3,
-        y: headofficePosition.y * canvasToMMFactorY - 4
+        x: headofficePosition.x * canvasToMMFactorX - 5,
+        y: headofficePosition.y * canvasToMMFactorY - 7
     }
     const scaledBrokerPosition = {
-        x: brokerPosition.x * canvasToMMFactorX - 3,
-        y: brokerPosition.y * canvasToMMFactorY - 4
+        x: brokerPosition.x * canvasToMMFactorX - 5,
+        y: brokerPosition.y * canvasToMMFactorY - 7
     }
     const scaledOtherPosition = {
-        x: otherPosition.x * canvasToMMFactorX - 3,
-        y: otherPosition.y * canvasToMMFactorY - 4
+        x: otherPosition.x * canvasToMMFactorX - 5,
+        y: otherPosition.y * canvasToMMFactorY - 7
+    }
+    const scaledShopDetails = {
+        x: shopDetailsPostition.x * canvasToMMFactorX - 5,
+        y: shopDetailsPostition.y * canvasToMMFactorY - 7
     }
 
     // Scaling factor for font size (from pixel to mm conversion)
     const   pixelToMMFactor = 0.2646; // 1 pixel ≈ 0.2646 mm
 
     const printFontSizeMM = 11 * pixelToMMFactor; // Scale the font size used on canvas
-    const tickFontSizeMM = 16 * pixelToMMFactor; // Adjust the tick mark size
+    const tickFontSizeMM = 25 * pixelToMMFactor; // Adjust the tick mark size
 
-    const printWindow = window.open('', '', 'width=800,height=600');
-    printWindow.document.open();
+    printWindow = window.open();
     printWindow.document.write(`
         <html>
         <head>
@@ -448,6 +466,7 @@ function printCanvas() {
                 #crmCodeText { top: ${scaledCrmCodePosition.y}mm; right: ${canvasWidthMM - scaledCrmCodePosition.x}mm; }
                 #financeCodeText { top: ${scaledFinanceCodePosition.y}mm; right: ${canvasWidthMM - scaledFinanceCodePosition.x}mm; }
 
+
                 #tujariTick { top: ${scaledTujariPosition.y}mm; left: ${scaledTujariPosition.x}mm; }
                 #idariTick { top: ${scaledIdariPosition.y}mm; left: ${scaledIdariPosition.x}mm; }
                 #tibiTick { top: ${scaledTibiPosition.y}mm; left: ${scaledTibiPosition.x}mm; }
@@ -458,6 +477,8 @@ function printCanvas() {
                 #headofficeTick { top: ${scaledHeadofficePosition.y}mm; left: ${scaledHeadofficePosition.x}mm; }
                 #brokerTick { top: ${scaledBrokerPosition.y}mm; left: ${scaledBrokerPosition.x}mm; }
                 #otherTick { top: ${scaledOtherPosition.y}mm; left: ${scaledOtherPosition.x}mm; }
+                #shopDetailsTick { top: ${scaledShopDetails.y}mm; left: ${scaledShopDetails.x}mm; }
+
 
             </style>
         </head>
@@ -485,15 +506,13 @@ function printCanvas() {
                 ${isHeadofficeChecked ? `<div id="headofficeTick" class="tick">✔</div>` : ''}
                 ${isBrokerChecked ? `<div id="brokerTick" class="tick">✔</div>` : ''}
                 ${isOtherChecked ? `<div id="otherTick" class="tick">✔</div>` : ''}
+                ${isShopDeatilsChecked ? `<div id="shopDetailsTick" class="tick">✔</div>` : ''}
 
 
             </div>
             <script>
                 window.onload = function() {
                     window.print();
-                    window.onafterprint = function() {
-                        window.close();
-                    };
                 };
             </script>
         </body>
