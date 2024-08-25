@@ -13,6 +13,7 @@ body {
 .form-container {
     width: 30%;
     margin-left: auto; /* Push the form container to the right */
+    text-align: right; /* Align text and inputs to the right */
 }
 
 #reservationCanvas {
