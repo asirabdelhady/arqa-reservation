@@ -12,82 +12,82 @@
     </div>
 
     <div class="form-container">
-        <h2>Enter Reservation Details</h2>
+        <h2>بيانات الحجز</h2>
         <form id="reservationForm">
             <div class="input-field">
-                <label>Choose Categories:</label><br>
-                <input type="radio" id="tujari" name="category" value="نجاري" onchange="updateCanvas()"> تجاري
-                <input type="radio" id="idari" name="category" value="اداري" onchange="updateCanvas()"> اداري
-                <input type="radio" id="tibi" name="category" value="طبي" onchange="updateCanvas()"> طبي
+                تجاري<input type="radio" id="tujari" name="category" value="نجاري" onchange="updateCanvas()"> 
+                اداري<input type="radio" id="idari" name="category" value="اداري" onchange="updateCanvas()"> 
+                طبي<input type="radio" id="tibi" name="category" value="طبي" onchange="updateCanvas()"> 
             </div>                        
             <div class="input-field">
-                <label for="name">Name:</label>
+                <label for="name">الاسم</label>
                 <input type="text" id="name" name="name" maxlength="39" oninput="updateCanvas()">
             </div>
             <div class="input-field">
-                <label for="phone">Phone Number:</label>
+                <label for="phone">الهاتف</label>
                 <input type="text" id="phone" name="phone" maxlength="13" oninput="updateCanvas()">
             </div>
             <div class="input-field">
-                <label for="date">Reservation Date:</label>
+                <label for="date">تاريخ الحجز</label>
                 <input type="date" id="date" name="date" oninput="updateCanvas()">
             </div>
             <div class="input-field">
-                <label for="occupation">Occupation</label>
+                <label for="occupation">الوظيفة</label>
                 <input type="text" id="occupation" name="occupation" maxlength="39" oninput="updateCanvas()">
             </div>
             <div class="input-field">
-                <label for="email">Email</label>
+                <label for="email">الايميل</label>
                 <input type="text" id="email" name="email" maxlength="39" oninput="updateCanvas()">
             </div>
             <div class="input-field">
-                <label>How did you find us?</label><br>
+                <label>كبف تعرفت علينا</label><br>
                 <input type="radio" id="website" name="howDidYouFindUS" value="facebook" onchange="updateCanvas()"> Website
                 <input type="radio" id="facebook" name="howDidYouFindUS" value="instagram" onchange="updateCanvas()"> Facebook
-                <input type="radio" id="headoffice" name="howDidYouFindUS" value="headOffice" onchange="updateCanvas()"> Head Office <br>
-                <input type="radio" id="broker" name="howDidYouFindUS" value="broker" onchange="updateCanvas()"> Broker
+                <input type="radio" id="headoffice" name="howDidYouFindUS" value="headOffice" onchange="updateCanvas()"> Head Office 
+                <input type="radio" id="broker" name="howDidYouFindUS" value="broker" onchange="updateCanvas()"> Broker <br>
                 <input type="radio" id="other" name="howDidYouFindUS" value="other" onchange="updateCanvas()"> Other
             </div>
             <div class="input-field"  id="otherHowField" style="display: none;">
-                <label for="otherHow">How did you find out about us</label>
+                <label for="otherHow">وسيلة التعاف</label>
                 <input type="text" id="otherHow" name="otherHow" maxlength="64" oninput="updateCanvas()">
             </div>
             <div class="input-field" id="brokerNameField" style="display: none;">
-                <label for="brokerName">Broker Name</label>
+                <label for="brokerName">اسم البائع</label>
                 <input type="text" id="brokerName" name="brokerName" maxlength="49" oninput="updateCanvas()">
             </div>
             <div class="input-field">
-                <label for="companyName">Company Name</label>
+                <label for="companyName">اسم لشركة</label>
                 <input type="text" id="companyName" name="companyName" maxlength="49" oninput="updateCanvas()">
             </div>
             <div class="input-field">
-                <label for="companyCode">Company Code</label>
+                <label for="companyCode">كود الشركة</label>
                 <input type="text" id="companyCode" name="companyCode" maxlength="29" oninput="updateCanvas()">
             </div>
             <div class="input-field">
-                <label for="crmCode">CRM Code</label>
+                <label for="crmCode">CRM كود</label>
                 <input type="text" id="crmCode" name="crmCode" maxlength="49" oninput="updateCanvas()">
             </div>
             <div class="input-field">
-                <label for="financeCode">Finance Code</label>
+                <label for="financeCode">Finance كود</label>
                 <input type="text" id="financeCode" name="financeCode" maxlength="28" oninput="updateCanvas()">
             </div>
             <div class="input-field">
-                <label>Type of Contract?</label><br>
-                <input type="radio" id="insideEgypt" name="contract" value="insideEgypt" onchange="updateCanvas()"> Inside Egypt
-                <input type="radio" id="outsideEgypt" name="contract" value="outsideEgypt" onchange="updateCanvas()"> Outside Egypt
+                <label>نوع التعاقد</label><br>
+                داخل مصر<input type="radio" id="insideEgypt" name="contract" value="insideEgypt" onchange="updateCanvas()"> 
+                خارج مصر<input type="radio" id="outsideEgypt" name="contract" value="outsideEgypt" onchange="updateCanvas()"> 
             </div>
             <div class="input-field">
-                <label>Reservation Details</label><br>
-                <input type="radio" id="shopDetails" name="reservationDetails" value="shopDetails" onchange="updateCanvas()"> Shop
-                <input type="radio" id="officeDetails" name="reservationDetails" value="officeDetails" onchange="updateCanvas()"> Office
-                <input type="radio" id="clinicDetails" name="reservationDetails" value="clinicDetails" onchange="updateCanvas()"> Clinic
-                <input type="radio" id="otherDetails" name="reservationDetails" value="otherDetails" onchange="updateCanvas()"> Other
+                <label>بيانات الحجز</label><br>
+                محل<input type="radio" id="officeDetails" name="reservationDetails" value="officeDetails" onchange="updateCanvas()"> 
+                مكتب<input type="radio" id="clinicDetails" name="reservationDetails" value="clinicDetails" onchange="updateCanvas()"> 
+                عيادة<input type="radio" id="otherDetails" name="reservationDetails" value="otherDetails" onchange="updateCanvas()"> 
+                أخرى<input type="radio" id="shopDetails" name="reservationDetails" value="shopDetails" onchange="updateCanvas()"> 
             </div>
             <div class="input-field" id="otherDetailsFields" style="display: none;">
-                <label for="otherDetailsInput">What type is the unit?</label>
+                <label for="otherDetailsInput">أخرى</label>
                 <input type="text" id="otherDetailsInput" name="otherDetailsInput" maxlength="20" oninput="updateCanvas()">
             </div>
+            
             <table border="1">
                 <thead>
                     <tr>
@@ -110,10 +110,15 @@
                     </tr>
                 </tbody>
             </table>
-            <!-- <div class="input-field">
+            <div class="input-field">
                 <label for="totalUnitPrice">اجمالي ثمن الوحده</label><br>
                 <input type="number" id="totalUnitPrice" name="totalUnitPrice" maxlength="49" oninput="updateCanvas()">
-            </div> -->
+            </div>
+            <div class="input-field">
+                <label>طريقة السداد</label><br>
+                <input type="radio" id="typeCash" name="paymentType" value="typeCash" onchange="updateCanvas()"> نقدا
+                <input type="radio" id="typeCheque" name="paymentType" value="typeCheque" onchange="updateCanvas()"> حسب النظام المرفق
+            </div>
             <p id="numberInWords"></p> 
             <br>
             <table border="1">
@@ -153,11 +158,7 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="input-field">
-                <label>Payment Type</label><br>
-                <input type="radio" id="typeCash" name="paymentType" value="typeCash" onchange="updateCanvas()"> Cash
-                <input type="radio" id="typeCheque" name="paymentType" value="typeCheque" onchange="updateCanvas()"> With Cheque
-            </div>
+            
             <div class="input-field">
                 <label for="serviceDeposit">وديعة الصيانه</label><br>
                 <input type="text" id="serviceDeposit" name="serviceDeposit" maxlength="49" oninput="updateCanvas()">
@@ -176,7 +177,7 @@
                 <input type="text" id="headOfSales" name="headOfSales maxlength="49" oninput="updateCanvas()">
             </div>
             <div class="input-field">
-                <label for="salesSupervisor">مدير المبيعات</label><br>
+                <label for="salesSupervisor">مدير<br> المبيعات</label><br>
                 <input type="text" id="salesSupervisor" name="salesSupervisor" maxlength="49" oninput="updateCanvas()">
             </div>
             <div class="input-field">
@@ -188,7 +189,7 @@
                 <input type="text" id="applicant" name="applicant" maxlength="49" oninput="updateCanvas()">
             </div>
            </div>
-            <button type="button" onclick="printCanvas()">Print Reservation Paper</button>
+            <button style="color: white; background-color: #123B60;" type="button" onclick="printCanvas()">طباعة</button>
         </form>
     </div>
 

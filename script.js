@@ -5,16 +5,17 @@ const centeredInputs = ['project']; // Example: input fields that should be cent
 
 //comment
 // Define the positions for the checkboxes (adjust these for correct positioning)
-const tujariPosition = { x: 942, y: 505 };  // Example position for نجاري
-const idariPosition = { x: 2443, y: 505 };   // Example position for اداري
-const tibiPosition = { x: 1693, y: 505 };    // Example position for طبي
-const insideEgyptPosition = { x: 2015, y: 1205 };    // Example position for طبي
-const outsideEgyptPosition = { x: 842, y: 1205 };    // Example position for طبي
-const websitePosition = { x: 350, y: 763 };  // Example position for نجاري
-const facebookPosition = { x: 800, y: 763 };   // Example position for اداري
-const headofficePosition = { x: 1285, y: 763 };    // Example position for طبي
-const brokerPosition = { x: 1645, y: 763 };    // Example position for طبي
-const otherPosition = { x: 1972, y: 763 };
+
+const tujariPosition = { x: 1720, y: 505 };  // Example position for نجاري
+const idariPosition = { x: 970, y: 505 };   // Example position for اداري
+const tibiPosition = { x: 2470, y: 505 };    // Example position for طبي
+const insideEgyptPosition = { x: 869, y: 1210 };    // Example position for طبي
+const outsideEgyptPosition = { x: 2040, y: 1210 };    // Example position for طبي
+const websitePosition = { x: 375, y: 770 };  // Example position for نجاري
+const facebookPosition = { x: 825, y: 770 };   // Example position for اداري
+const headofficePosition = { x: 1305, y: 770 };    // Example position for طبي
+const brokerPosition = { x: 1670, y: 770 };    // Example position for طبي
+const otherPosition = { x: 1999, y: 770 };
 const shopDetailsPostition = {x: 2465, y: 1435 }
 const officeDetailsPosition = {x: 1775, y: 1435 }
 const clinicDetailsPosition = {x: 1040, y: 1435 }
@@ -64,8 +65,8 @@ const companyCodePosition = { x: 685, y: 980};  // Adjust this for correct posit
 const crmCodePosition = { x: 2145, y: 1060};  // Adjust this for correct positioning
 const financeCodePosition = { x: 685, y: 1060};  // Adjust this for correct positioning
 const otherDetailsInputPosition = { x: 400, y: 1370 };  // Adjust this for correct positioning
-const typeCashPosition = {x: 1910, y: 1870 }
-const typeChequePosition = {x: 960, y: 1870 }
+const typeCashPosition = {x: 960, y: 1870 }
+const typeChequePosition = {x: 1910, y: 1870 }
 
 
 
