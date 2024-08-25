@@ -115,11 +115,14 @@
                 <input type="number" id="totalUnitPrice" name="totalUnitPrice" maxlength="49" oninput="updateCanvas()">
             </div>
             <div class="input-field">
+                <label for="numberInWords">فقط</label><br>
+                <input type="text" id="numberInWords" name="numberInWords" maxlength="49" oninput="updateCanvas()">
+            </div>
+            <div class="input-field">
                 <label style="font-weight: 800;">طريقة السداد</label><br>
                 <input type="radio" id="typeCash" name="paymentType" value="typeCash" onchange="updateCanvas()"> نقدا
                 <input type="radio" id="typeCheque" name="paymentType" value="typeCheque" onchange="updateCanvas()"> حسب النظام المرفق
             </div>
-            <p id="numberInWords"></p> 
             <br>
             <table border="1">
                 <thead>
